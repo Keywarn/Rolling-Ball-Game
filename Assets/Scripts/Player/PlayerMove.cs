@@ -23,6 +23,11 @@ public class PlayerMove : MonoBehaviour
         flying = false;
     }
 
+    void Update(){
+        if (Input.GetButtonDown("Fly") && !Grounded())
+         flying = !flying;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
