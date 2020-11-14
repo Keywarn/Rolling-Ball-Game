@@ -12,13 +12,52 @@ namespace UnityStandardAssets.Utility
         [SerializeField]
         private float distance;
 
+		[SerializeField]
+		private float maxVerticalAngle;
+		[SerializeField]
+		private float maxHorizontalAngle;
+		[SerializeField]
+		private float tiltSpeed;
+
+		[SerializeField]
+    	private bool useFloorNormal;
+
+		private float initialXRotation;
+
 
 		private Rigidbody rigid;
 
         // Use this for initialization
         void Start() { 
 			rigid = player.GetComponent<Rigidbody>();
+			initialXRotation = transform.eulerAngles.x;
 		}
+
+		void Update() {
+			CameraTilt();
+		}
+
+		void CameraTilt()
+    	{
+			// Rotate camera container along the x axis when tilting the joystick up or down to give a forward and back tilt effect.
+			// The further up the joystick is the higher the angle for target rotation will be and vice versa.
+			float scaledVerticalTilt = initialXRotation - (Input.GetAxis("Vertical") * maxVerticalAngle);
+
+			// Using floor normal adjust the rotation of the camera's x axis at rest.
+			float angleBetweenFloorNormal = useFloorNormal ? Vector3.SignedAngle(Vector3.up, player.GetComponent<PlayerMove>().GetFloorNormal(), transform.right) : 0.0f;
+
+			Quaternion targetXRotation = Quaternion.Euler(scaledVerticalTilt + angleBetweenFloorNormal, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetXRotation, tiltSpeed * Time.deltaTime);
+
+			// Rotate camera along the z axis when tilting the joystick left or right to give a left and right tilt effect.
+			// The further right the joystick is the higher the angle for target rotation will be and vice versa.
+			float scaledHorizontalTilt = Input.GetAxis("Horizontal") * maxHorizontalAngle;
+
+			Quaternion targetZRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, scaledHorizontalTilt);
+
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetZRotation, tiltSpeed * Time.deltaTime);
+			}
 
         // Update is called once per frame
         void LateUpdate()
@@ -44,7 +83,8 @@ namespace UnityStandardAssets.Utility
 			// Position the camera behind target at a distance of offset
 			transform.position = player.transform.position - (transform.forward * distance);
 			transform.position += Vector3.up * 3f;
-			transform.LookAt(new Vector3(player.transform.position.x,transform.position.y,player.transform.position.z));
+			//transform.LookAt(new Vector3(player.transform.position.x,transform.position.y,player.transform.position.z));
+			//transform.LookAt(player.transform.position);
         }
     }
 }
