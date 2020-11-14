@@ -10,20 +10,12 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float rollSpeed = 50;
 
-    //Flying values
-    [SerializeField]
-    private float forwardSpeed = 25f;
-    [SerializeField]
-    private float strafeSpped = 7.5f;
-    [SerializeField]
-    private float hoverSpeed = 5f;
-
     [SerializeField]
     private GameObject mainCamera;
     [SerializeField]
     private LayerMask ground;
 
-    private bool flying;
+    public bool flying;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +26,7 @@ public class PlayerMove : MonoBehaviour
     void Update(){
         if (Input.GetButtonDown("Fly") && !Grounded()) {
             flying = true;
+            rigid.useGravity = false;
             transform.rotation = Quaternion.identity;
             rigid.angularVelocity = Vector3.zero;
         }
@@ -79,11 +72,6 @@ public class PlayerMove : MonoBehaviour
 
             //Gravity
             rigid.velocity -= Vector3.up * Time.deltaTime;
-        }
-        //Not grounded and not flying
-        else {
-            //Gravity
-            rigid.velocity -= Vector3.up * 9.8f * Time.deltaTime;
         }
     }
 

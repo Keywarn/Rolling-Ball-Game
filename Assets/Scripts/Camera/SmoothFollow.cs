@@ -36,7 +36,9 @@ namespace UnityStandardAssets.Utility
 		}
 
 		void Update() {
-			CameraTilt();
+			if(!player.GetComponent<PlayerMove>().flying){
+				CameraTilt();
+			}
 		}
 
 		void CameraTilt()
