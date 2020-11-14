@@ -258,6 +258,8 @@ MonoBehaviour:
   maxRoll: 35
   maxYaw: 20
   flyRotSpeed: 2
+  flySpeedMult: 0.5
+  flightGrav: 1
   flying: 0
 --- !u!1 &344977580
 GameObject:
@@ -348,8 +350,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344977580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -26.8, z: 77.6}
-  m_LocalScale: {x: 50, y: 0.5, z: 50}
+  m_LocalPosition: {x: 0, y: -26.8, z: 164.7}
+  m_LocalScale: {x: 500, y: 0.5, z: 500}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7

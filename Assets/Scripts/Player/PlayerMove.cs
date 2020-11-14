@@ -24,6 +24,13 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float flyRotSpeed = 1;
 
+    [SerializeField]
+    private float flySpeedMult = 0.5f;
+    [SerializeField]
+    private float flightGrav = 1f;
+    [SerializeField]
+    private float flightLength = 10f;
+
     public bool flying;
     // Start is called before the first frame update
     void Start()
@@ -69,22 +76,26 @@ public class PlayerMove : MonoBehaviour
             //Use root(2) to counter magnitudes
             //float yaw = (transform.right + Vector3.up).magnitude - 1.414214f;
 
+            flySpeedMult -= Time.deltaTime / flightLength;
+            flightGrav += Time.deltaTime / flightLength;
+
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(tilt,yaw, -roll), Time.deltaTime * flyRotSpeed);
 
             //Gravity
-            rigid.velocity -= Vector3.up * Time.deltaTime;
+            rigid.velocity -= Vector3.up * Time.deltaTime * flightGrav;
 
             //Keep flying if we have some momentum (adds 'upwind')
             Vector3 vertVel = rigid.velocity - Vector3.Exclude(transform.up, rigid.velocity);
             rigid.velocity -= vertVel * Time.deltaTime;
-            rigid.velocity += vertVel.magnitude * transform.forward * Time.deltaTime /10.0f;
+            rigid.velocity += vertVel.magnitude * transform.forward * Time.deltaTime * flySpeedMult;
 
             //Drag
             Vector3 forwardDrag = rigid.velocity - Vector3.Exclude(transform.forward, rigid.velocity);
-            rigid.AddForce( -forwardDrag * forwardDrag.magnitude * Time.deltaTime / 1000f);
+            rigid.AddForce( -forwardDrag * forwardDrag.magnitude * Time.deltaTime);
             //High Side drag, cant glide sideways
             Vector3 sideDrag = rigid.velocity - Vector3.Exclude(transform.right, rigid.velocity);
             rigid.AddForce( -sideDrag * sideDrag.magnitude * Time.deltaTime);
+            //UpDrag
 
         }
     }
