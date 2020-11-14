@@ -254,8 +254,10 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
-  tiltFlySpeed: 40
-  rollFlySpeed: 40
+  maxTilt: 35
+  maxRoll: 35
+  maxYaw: 20
+  flyRotSpeed: 2
   flying: 0
 --- !u!1 &344977580
 GameObject:

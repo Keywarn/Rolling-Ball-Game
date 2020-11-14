@@ -16,9 +16,13 @@ public class PlayerMove : MonoBehaviour
     private LayerMask ground;
 
     [SerializeField]
-    private float tiltFlySpeed = 40;
+    private float maxTilt = 20;
     [SerializeField]
-    private float rollFlySpeed = 40;
+    private float maxRoll = 20;
+    [SerializeField]
+    private float maxYaw = 20;
+    [SerializeField]
+    private float flyRotSpeed = 1;
 
     public bool flying;
     // Start is called before the first frame update
@@ -59,20 +63,13 @@ public class PlayerMove : MonoBehaviour
             }
         }
         else if (flying) {
-            float roll = SimpleInput.GetAxis("Horizontal") / Time.timeScale;
-            float tilt = SimpleInput.GetAxis("Vertical") / Time.timeScale;
+            float roll = SimpleInput.GetAxis("Horizontal") * maxRoll;
+            float tilt = SimpleInput.GetAxis("Vertical") * maxTilt;
+            float yaw =  SimpleInput.GetAxis("Horizontal") * maxYaw;
             //Use root(2) to counter magnitudes
-            float yaw = (transform.right + Vector3.up).magnitude - 1.414214f;
+            //float yaw = (transform.right + Vector3.up).magnitude - 1.414214f;
 
-            if (tilt != 0){
-                transform.Rotate(transform.right, tilt * Time.deltaTime * tiltFlySpeed, Space.World);
-            }
-            if (roll != 0){
-                transform.Rotate(transform.forward, roll * Time.deltaTime * -rollFlySpeed, Space.World);
-            }
-            if (yaw != 0){
-                //transform.Rotate(Vector3.up, yaw * Time.deltaTime * 150, Space.World);
-            }
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(tilt,yaw, -roll), Time.deltaTime * flyRotSpeed);
 
             //Gravity
             rigid.velocity -= Vector3.up * Time.deltaTime;
