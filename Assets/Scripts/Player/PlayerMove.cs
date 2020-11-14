@@ -31,6 +31,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float flightLength = 10f;
 
+    private Vector3 flightPath;
+
     public bool flying;
     // Start is called before the first frame update
     void Start()
@@ -43,8 +45,10 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButtonDown("Fly") && !Grounded() && !flying) {
             flying = true;
             rigid.useGravity = false;
-            transform.rotation = Quaternion.identity;
+            transform.rotation = mainCamera.transform.rotation;
+            flightPath = transform.rotation.eulerAngles;
             rigid.angularVelocity = Vector3.zero;
+
         }
     }
 
@@ -70,16 +74,15 @@ public class PlayerMove : MonoBehaviour
             }
         }
         else if (flying) {
-            float roll = SimpleInput.GetAxis("Horizontal") * maxRoll;
+            float roll = -SimpleInput.GetAxis("Horizontal") * maxRoll;
             float tilt = SimpleInput.GetAxis("Vertical") * maxTilt;
             float yaw =  SimpleInput.GetAxis("Horizontal") * maxYaw;
-            //Use root(2) to counter magnitudes
-            //float yaw = (transform.right + Vector3.up).magnitude - 1.414214f;
 
-            flySpeedMult -= Time.deltaTime / flightLength;
+            flySpeedMult = Mathf.Min(flySpeedMult -(Time.deltaTime / flightLength), 0f);
             flightGrav += Time.deltaTime / flightLength;
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(tilt,yaw, -roll), Time.deltaTime * flyRotSpeed);
+            Vector3 targetRot = flightPath + new Vector3(tilt,yaw,roll);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetRot), Time.deltaTime * flyRotSpeed);
 
             //Gravity
             rigid.velocity -= Vector3.up * Time.deltaTime * flightGrav;
@@ -95,8 +98,6 @@ public class PlayerMove : MonoBehaviour
             //High Side drag, cant glide sideways
             Vector3 sideDrag = rigid.velocity - Vector3.Exclude(transform.right, rigid.velocity);
             rigid.AddForce( -sideDrag * sideDrag.magnitude * Time.deltaTime);
-            //UpDrag
-
         }
     }
 

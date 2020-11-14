@@ -96,7 +96,7 @@ namespace UnityStandardAssets.Utility
 			else {
 
 				Transform target = player.transform;
-				float heightDamping = 5f;
+				float heightDamping = 4f;
 				float rotationDamping = 3.0f;
 				// Calculate the current rotation angles
 				float wantedRotationAngle = target.eulerAngles.y;
@@ -123,7 +123,7 @@ namespace UnityStandardAssets.Utility
 				transform.position = new Vector3(transform.position.x,currentHeight,transform.position.z);
 			
 				// Always look at the target
-				//transform.LookAt(target);
+				transform.LookAt(target);
 			}
         }
     }
