@@ -49,7 +49,6 @@ public class PlayerMove : MonoBehaviour
                 Vector3 forward = Vector3.Cross(mainCamera.transform.right, floorNormal);
                 Vector3 forwardApply = forward * SimpleInput.GetAxis("Vertical");
                 Vector3 rightApply = SimpleInput.GetAxis("Horizontal") * mainCamera.transform.right;
-                Debug.DrawLine(transform.position, transform.position + ((forwardApply + rightApply) * rollSpeed), Color.white, 0.5f);
                 //Zoom
                 rigid.AddForce((forwardApply + rightApply) * rollSpeed);
             }
@@ -72,6 +71,11 @@ public class PlayerMove : MonoBehaviour
 
             //Gravity
             rigid.velocity -= Vector3.up * Time.deltaTime;
+
+            //Keep flying if we have some momentum (adds 'upwind')
+            Vector3 vertVel = rigid.velocity - Vector3.Exclude(transform.up, rigid.velocity);
+            rigid.velocity -= vertVel * Time.deltaTime;
+            rigid.velocity += vertVel.magnitude * transform.forward * Time.deltaTime /10.0f;
         }
     }
 
