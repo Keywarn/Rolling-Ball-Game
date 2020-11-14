@@ -10,6 +10,14 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float rollSpeed = 50;
 
+    //Flying values
+    [SerializeField]
+    private float forwardSpeed = 25f;
+    [SerializeField]
+    private float strafeSpped = 7.5f;
+    [SerializeField]
+    private float hoverSpeed = 5f;
+
     [SerializeField]
     private GameObject mainCamera;
     [SerializeField]
@@ -24,8 +32,11 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetButtonDown("Fly") && !Grounded())
-         flying = !flying;
+        if (Input.GetButtonDown("Fly") && !Grounded()) {
+            flying = true;
+            transform.rotation = Quaternion.identity;
+            rigid.angularVelocity = Vector3.zero;
+        }
     }
 
     // Update is called once per frame
@@ -49,6 +60,30 @@ public class PlayerMove : MonoBehaviour
                 //Zoom
                 rigid.AddForce((forwardApply + rightApply) * rollSpeed);
             }
+        }
+        else if (flying) {
+            float roll = SimpleInput.GetAxis("Horizontal") / Time.timeScale;
+            float tilt = SimpleInput.GetAxis("Vertical") / Time.timeScale;
+            //Use root(2) to counter magnitudes
+            float yaw = (transform.right + Vector3.up).magnitude - 1.414214f;
+
+            if (tilt != 0){
+                transform.Rotate(transform.right, tilt * Time.deltaTime * 10, Space.World);
+            }
+            if (roll != 0){
+                transform.Rotate(transform.forward, roll * Time.deltaTime * -10, Space.World);
+            }
+            if (yaw != 0){
+                transform.Rotate(Vector3.up, yaw * Time.deltaTime * 15, Space.World);
+            }
+
+            //Gravity
+            rigid.velocity -= Vector3.up * Time.deltaTime;
+        }
+        //Not grounded and not flying
+        else {
+            //Gravity
+            rigid.velocity -= Vector3.up * 9.8f * Time.deltaTime;
         }
     }
 
