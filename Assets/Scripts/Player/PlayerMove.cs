@@ -15,6 +15,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private LayerMask ground;
 
+    [SerializeField]
+    private float tiltFlySpeed = 40;
+    [SerializeField]
+    private float rollFlySpeed = 40;
+
     public bool flying;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +29,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetButtonDown("Fly") && !Grounded()) {
+        if (Input.GetButtonDown("Fly") && !Grounded() && !flying) {
             flying = true;
             rigid.useGravity = false;
             transform.rotation = Quaternion.identity;
@@ -60,13 +65,13 @@ public class PlayerMove : MonoBehaviour
             float yaw = (transform.right + Vector3.up).magnitude - 1.414214f;
 
             if (tilt != 0){
-                transform.Rotate(transform.right, tilt * Time.deltaTime * 10, Space.World);
+                transform.Rotate(transform.right, tilt * Time.deltaTime * tiltFlySpeed, Space.World);
             }
             if (roll != 0){
-                transform.Rotate(transform.forward, roll * Time.deltaTime * -10, Space.World);
+                transform.Rotate(transform.forward, roll * Time.deltaTime * -rollFlySpeed, Space.World);
             }
             if (yaw != 0){
-                transform.Rotate(Vector3.up, yaw * Time.deltaTime * 15, Space.World);
+                //transform.Rotate(Vector3.up, yaw * Time.deltaTime * 150, Space.World);
             }
 
             //Gravity
