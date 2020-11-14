@@ -39,9 +39,6 @@ namespace UnityStandardAssets.Utility
 			if(!player.GetComponent<PlayerMove>().flying){
 				CameraTilt();
 			}
-			else {
-				CameraTilt();
-			}
 		}
 
 		void CameraTilt()
@@ -69,29 +66,65 @@ namespace UnityStandardAssets.Utility
         // Update is called once per frame
         void LateUpdate()
         {
-            // Get forward vector minus the y component
-			Vector3 vectorA = new Vector3(transform.forward.x, 0.0f, transform.forward.z);
+			//Follow Script for not flying
+			if(!player.GetComponent<PlayerMove>().flying){
+				// Get forward vector minus the y component
+				Vector3 vectorA = new Vector3(transform.forward.x, 0.0f, transform.forward.z);
 
-			// Get target's velocity vector minus the y component
-			Vector3 vectorB = new Vector3(rigid.velocity.x, 0.0f, rigid.velocity.z);
+				// Get target's velocity vector minus the y component
+				Vector3 vectorB = new Vector3(rigid.velocity.x, 0.0f, rigid.velocity.z);
 
-			// Find the angle between vectorA and vectorB
-			float rotateAngle = Vector3.SignedAngle(vectorA.normalized, vectorB.normalized, Vector3.up);
+				// Find the angle between vectorA and vectorB
+				float rotateAngle = Vector3.SignedAngle(vectorA.normalized, vectorB.normalized, Vector3.up);
 
-			// Get the target's speed (maginitude) without the y component
-			// Only set speed factor when vector A and B are almost facing the same direction
-			float speedFactor = Vector3.Dot(vectorA, vectorB) > 0.0f ? vectorB.magnitude : 1.0f;
+				// Get the target's speed (maginitude) without the y component
+				// Only set speed factor when vector A and B are almost facing the same direction
+				float speedFactor = Vector3.Dot(vectorA, vectorB) > 0.0f ? vectorB.magnitude : 1.0f;
 
-			// Rotate towards the angle between vectorA and vectorB
-			// Use speedFactor so camera doesn't rotatate at a constant speed
-			// Limit speedFactor to be between 1 and 2
-			transform.Rotate(Vector3.up, rotateAngle * Mathf.Clamp(speedFactor, 1.0f, 2.0f) * Time.deltaTime);
+				// Rotate towards the angle between vectorA and vectorB
+				// Use speedFactor so camera doesn't rotatate at a constant speed
+				// Limit speedFactor to be between 1 and 2
+				transform.Rotate(Vector3.up, rotateAngle * Mathf.Clamp(speedFactor, 1.0f, 2.0f) * Time.deltaTime);
 
-			// Position the camera behind target at a distance of offset
-			transform.position = player.transform.position - (transform.forward * distance);
-			transform.position += Vector3.up * height;
-			//transform.LookAt(new Vector3(player.transform.position.x,transform.position.y,player.transform.position.z));
-			//transform.LookAt(player.transform.position);
+				// Position the camera behind target at a distance of offset
+				transform.position = player.transform.position - (transform.forward * distance);
+				transform.position += Vector3.up * height;
+				//transform.LookAt(new Vector3(player.transform.position.x,transform.position.y,player.transform.position.z));
+				//transform.LookAt(player.transform.position);
+			}
+			//Smooth follow
+			else {
+
+				Transform target = player.transform;
+				float heightDamping = 2.0f;
+				float rotationDamping = 3.0f;
+				// Calculate the current rotation angles
+				float wantedRotationAngle = target.eulerAngles.y;
+				float wantedHeight = target.position.y + height;
+
+				float currentRotationAngle = transform.eulerAngles.y;
+				float currentHeight = transform.position.y;
+
+				// Damp the rotation around the y-axis
+				currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
+			
+				// Damp the height
+				currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
+
+				// Convert the angle into a rotation
+				var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+			
+				// Set the position of the camera on the x-z plane to:
+				// distance meters behind the target
+				transform.position = target.position;
+				transform.position -= currentRotation * Vector3.forward * distance;
+
+				// Set the height of the camera
+				transform.position = new Vector3(transform.position.x,currentHeight,transform.position.z);
+			
+				// Always look at the target
+				transform.LookAt(target);
+			}
         }
     }
 }
