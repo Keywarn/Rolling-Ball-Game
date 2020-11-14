@@ -10,13 +10,13 @@ namespace UnityStandardAssets.Utility
         private GameObject player;
         // The distance in the x-z plane to the target
         [SerializeField]
-        private Vector3 offset;
+        private float distance;
+
 
 		private Rigidbody rigid;
 
         // Use this for initialization
         void Start() { 
-			offset = transform.position - player.transform.position;
 			rigid = player.GetComponent<Rigidbody>();
 		}
 
@@ -42,8 +42,9 @@ namespace UnityStandardAssets.Utility
 			transform.Rotate(Vector3.up, rotateAngle * Mathf.Clamp(speedFactor, 1.0f, 2.0f) * Time.deltaTime);
 
 			// Position the camera behind target at a distance of offset
-			transform.position = player.transform.position - (transform.forward) + offset;
-			transform.LookAt(player.transform.position);
+			transform.position = player.transform.position - (transform.forward * distance);
+			transform.position += Vector3.up * 3f;
+			transform.LookAt(new Vector3(player.transform.position.x,transform.position.y,player.transform.position.z));
         }
     }
 }

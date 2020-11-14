@@ -248,7 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66183e0dca1a148469580391aaa7a28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollSpeed: 50
+  rollSpeed: 75
+  mainCamera: {fileID: 1792131733}
   ground:
     serializedVersion: 2
     m_Bits: 256
@@ -537,7 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 317538329}
-  offset: 5
+  distance: 10
 --- !u!114 &1792131738
 MonoBehaviour:
   m_ObjectHideFlags: 0

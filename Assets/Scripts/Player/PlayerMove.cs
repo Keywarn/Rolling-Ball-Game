@@ -11,6 +11,8 @@ public class PlayerMove : MonoBehaviour
     private float rollSpeed = 50;
 
     [SerializeField]
+    private GameObject mainCamera;
+    [SerializeField]
     private LayerMask ground;
     // Start is called before the first frame update
     void Start()
@@ -24,15 +26,22 @@ public class PlayerMove : MonoBehaviour
         
         //Check for ground
         if(Grounded()) {
-            Vector3 input = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
-
             Vector3 floorNormal = GetFloorNormal();
+            
+            
              // Slow down when no input recieved
-            if (input.magnitude < 0.1f && rigid.velocity.magnitude > 0.0f){
+            if (Input.GetAxis("Vertical") == 0.0f && Input.GetAxis("Horizontal") == 0.0f && rigid.velocity.magnitude > 0.0f){
                 rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, rollSpeed * 0.1f * Time.deltaTime);
             }
-            //Zoom
-            rigid.AddForce(input * rollSpeed);
+
+            else {
+                Vector3 forward = Vector3.Cross(mainCamera.transform.right, floorNormal);
+                Vector3 forwardApply = forward * Input.GetAxis("Vertical");
+                Vector3 rightApply = Input.GetAxis("Horizontal") * mainCamera.transform.right;
+
+                //Zoom
+                rigid.AddForce((forwardApply + rightApply) * rollSpeed);
+            }
         }
     }
 
