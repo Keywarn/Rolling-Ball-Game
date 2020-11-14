@@ -8,4 +8,4 @@ All assets are mine with the exception of:
 
 [SimpleInput by Yasirkula](https://github.com/yasirkula/UnitySimpleInput) - used for the on-screen joysticks in the mobile version.
 
-Music was produced by housemate, for this project, during the time-period of the gamejam
+Music was produced by my housemate, for this project, during the time-period of the gamejam
