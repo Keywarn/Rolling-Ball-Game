@@ -11,6 +11,8 @@ namespace UnityStandardAssets.Utility
         // The distance in the x-z plane to the target
         [SerializeField]
         private float distance;
+		[SerializeField]
+        private float height;
 
 		[SerializeField]
 		private float maxVerticalAngle;
@@ -41,7 +43,7 @@ namespace UnityStandardAssets.Utility
     	{
 			// Rotate camera container along the x axis when tilting the joystick up or down to give a forward and back tilt effect.
 			// The further up the joystick is the higher the angle for target rotation will be and vice versa.
-			float scaledVerticalTilt = initialXRotation - (Input.GetAxis("Vertical") * maxVerticalAngle);
+			float scaledVerticalTilt = initialXRotation - (SimpleInput.GetAxis("Vertical") * maxVerticalAngle);
 
 			// Using floor normal adjust the rotation of the camera's x axis at rest.
 			float angleBetweenFloorNormal = useFloorNormal ? Vector3.SignedAngle(Vector3.up, player.GetComponent<PlayerMove>().GetFloorNormal(), transform.right) : 0.0f;
@@ -52,7 +54,7 @@ namespace UnityStandardAssets.Utility
 
 			// Rotate camera along the z axis when tilting the joystick left or right to give a left and right tilt effect.
 			// The further right the joystick is the higher the angle for target rotation will be and vice versa.
-			float scaledHorizontalTilt = Input.GetAxis("Horizontal") * maxHorizontalAngle;
+			float scaledHorizontalTilt = SimpleInput.GetAxis("Horizontal") * maxHorizontalAngle;
 
 			Quaternion targetZRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, scaledHorizontalTilt);
 
@@ -82,7 +84,7 @@ namespace UnityStandardAssets.Utility
 
 			// Position the camera behind target at a distance of offset
 			transform.position = player.transform.position - (transform.forward * distance);
-			transform.position += Vector3.up * 3f;
+			transform.position += Vector3.up * height;
 			//transform.LookAt(new Vector3(player.transform.position.x,transform.position.y,player.transform.position.z));
 			//transform.LookAt(player.transform.position);
         }

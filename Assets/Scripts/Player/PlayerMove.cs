@@ -29,14 +29,14 @@ public class PlayerMove : MonoBehaviour
             Vector3 floorNormal = GetFloorNormal();
             
              // Slow down when no input recieved
-            if (Input.GetAxis("Vertical") == 0.0f && Input.GetAxis("Horizontal") == 0.0f && rigid.velocity.magnitude > 0.0f){
+            if (SimpleInput.GetAxis("Vertical") == 0.0f && SimpleInput.GetAxis("Horizontal") == 0.0f && rigid.velocity.magnitude > 0.0f){
                 rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, rollSpeed * 0.1f * Time.deltaTime);
             }
 
             else {
                 Vector3 forward = Vector3.Cross(mainCamera.transform.right, floorNormal);
-                Vector3 forwardApply = forward * Input.GetAxis("Vertical");
-                Vector3 rightApply = Input.GetAxis("Horizontal") * mainCamera.transform.right;
+                Vector3 forwardApply = forward * SimpleInput.GetAxis("Vertical");
+                Vector3 rightApply = SimpleInput.GetAxis("Horizontal") * mainCamera.transform.right;
                 Debug.DrawLine(transform.position, transform.position + ((forwardApply + rightApply) * rollSpeed), Color.white, 0.5f);
                 //Zoom
                 rigid.AddForce((forwardApply + rightApply) * rollSpeed);
