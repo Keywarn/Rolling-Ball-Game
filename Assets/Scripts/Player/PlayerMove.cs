@@ -76,6 +76,14 @@ public class PlayerMove : MonoBehaviour
             Vector3 vertVel = rigid.velocity - Vector3.Exclude(transform.up, rigid.velocity);
             rigid.velocity -= vertVel * Time.deltaTime;
             rigid.velocity += vertVel.magnitude * transform.forward * Time.deltaTime /10.0f;
+
+            //Drag
+            Vector3 forwardDrag = rigid.velocity - Vector3.Exclude(transform.forward, rigid.velocity);
+            rigid.AddForce( -forwardDrag * forwardDrag.magnitude * Time.deltaTime / 1000f);
+            //High Side drag, cant glide sideways
+            Vector3 sideDrag = rigid.velocity - Vector3.Exclude(transform.right, rigid.velocity);
+            rigid.AddForce( -sideDrag * sideDrag.magnitude * Time.deltaTime);
+
         }
     }
 
