@@ -14,10 +14,13 @@ public class PlayerMove : MonoBehaviour
     private GameObject mainCamera;
     [SerializeField]
     private LayerMask ground;
+
+    private bool flying;
     // Start is called before the first frame update
     void Start()
     {
         rigid = this.GetComponent<Rigidbody>();
+        flying = false;
     }
 
     // Update is called once per frame
@@ -25,7 +28,7 @@ public class PlayerMove : MonoBehaviour
     {
         
         //Check for ground
-        if(Grounded()) {
+        if(Grounded() &! flying) {
             Vector3 floorNormal = GetFloorNormal();
             
              // Slow down when no input recieved
