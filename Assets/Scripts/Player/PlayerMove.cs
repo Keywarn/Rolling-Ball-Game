@@ -48,6 +48,9 @@ public class PlayerMove : MonoBehaviour
     private AudioSource rolling;
 
     [SerializeField]
+    private AudioSource collect;
+
+    [SerializeField]
     private GameObject water;
 
     public bool flying;
@@ -170,6 +173,19 @@ public class PlayerMove : MonoBehaviour
         if (col.gameObject == water){
             Destroy(mainCamera.GetComponent<SmoothFollow>());
             mainCamera.GetComponent<GameManager>().EndGame(false);
+        }
+
+        if (col.gameObject.tag == "pickup"){
+            Destroy(col.gameObject);
+            if(flying){
+                rigid.velocity += 5 * transform.forward;
+            }
+            else{
+                Vector3 floorNormal = GetFloorNormal();
+                rigid.velocity += 5 * Vector3.Cross(mainCamera.transform.right, floorNormal);
+            }
+
+            collect.Play();
         }
     }
     
