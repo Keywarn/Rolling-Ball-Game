@@ -33,6 +33,9 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 flightPath;
 
+    [SerializeField]
+    private Animator capsuleAnimator;
+
     public bool flying;
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,7 @@ public class PlayerMove : MonoBehaviour
     void Update(){
         if (Input.GetButtonDown("Fly") && !Grounded() && !flying) {
             flying = true;
+            capsuleAnimator.SetTrigger("Open");
             rigid.useGravity = false;
             transform.rotation = mainCamera.transform.rotation;
             flightPath = transform.rotation.eulerAngles;
