@@ -828,6 +828,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8325568932289254353, guid: 478dae6b10d814d528cd50000fe98089, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325568932289254353, guid: 478dae6b10d814d528cd50000fe98089, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 8325568932504799491, guid: 478dae6b10d814d528cd50000fe98089, type: 3}
       propertyPath: m_Name
       value: Canvas
