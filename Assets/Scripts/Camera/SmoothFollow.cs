@@ -36,7 +36,7 @@ namespace UnityStandardAssets.Utility
 		}
 
 		void Update() {
-			if(!player.GetComponent<PlayerMove>().flying && player.GetComponent<PlayerMove>().Grounded()){
+			if(!player.GetComponent<PlayerMove>().flying && player.GetComponent<PlayerMove>().Grounded() && !player.GetComponent<PlayerMove>().canScore){
 				CameraTilt();
 			}
 		}

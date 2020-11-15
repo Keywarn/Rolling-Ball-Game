@@ -36,18 +36,24 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private Animator capsuleAnimator;
 
+    [SerializeField]
+    private LayerMask scoreboard;
+
     public bool flying;
+    public bool canScore = false;
+    public bool scored = false;
     // Start is called before the first frame update
     void Start()
     {
         rigid = this.GetComponent<Rigidbody>();
         flying = false;
+        canScore = false;
+        scored = false;
     }
 
     void Update(){
         bool toggle = false;
         if (SimpleInput.GetButtonUp("Fly") && !Grounded() && !flying && !toggle) {
-            Debug.Log("Open");
             flying = true;
             capsuleAnimator.SetTrigger("Open");
             rigid.useGravity = false;
@@ -61,11 +67,15 @@ public class PlayerMove : MonoBehaviour
         }
 
         if (SimpleInput.GetButtonUp("Fly") && !Grounded() && flying && !toggle) {
-            Debug.Log("Close");
             flying = false;
+            canScore = true;
             capsuleAnimator.SetTrigger("Close");
             rigid.useGravity = true;
 
+        }
+        
+        if (rigid.velocity.magnitude < 0.1f && Grounded() && canScore && !scored) {
+            Score();
         }
     }
 
@@ -82,7 +92,7 @@ public class PlayerMove : MonoBehaviour
                 rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, rollSpeed * 0.1f * Time.deltaTime);
             }
 
-            else {
+            else if (!canScore) {
                 Vector3 forward = Vector3.Cross(mainCamera.transform.right, floorNormal);
                 Vector3 forwardApply = forward * SimpleInput.GetAxis("Vertical");
                 Vector3 rightApply = SimpleInput.GetAxis("Horizontal") * mainCamera.transform.right;
@@ -117,7 +127,18 @@ public class PlayerMove : MonoBehaviour
             rigid.AddForce( -sideDrag * sideDrag.magnitude * Time.deltaTime);
         }
     }
-
+    
+    public void Score() {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position,Vector3.down,out hit,2f))
+            {
+                if (scoreboard == (scoreboard | (1 << hit.transform.gameObject.layer))) 
+                {  
+                    scored = true;
+                    Debug.Log("Scored:" + hit.transform.gameObject.GetComponent<Score>().score);
+                }
+            }
+    }
     public bool Grounded()
     {
         return Physics.CheckSphere(transform.position - (Vector3.up * 0.5f), 1, ground);
