@@ -78,6 +78,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void Fly() {
+        toggle = false;
         if (!Grounded() && !flying && !toggle) {
             flying = true;
             capsuleAnimator.SetTrigger("Open");
@@ -186,6 +187,7 @@ public class PlayerMove : MonoBehaviour
             }
 
             collect.Play();
+            mainCamera.GetComponent<GameManager>().score += 10;
         }
     }
     
