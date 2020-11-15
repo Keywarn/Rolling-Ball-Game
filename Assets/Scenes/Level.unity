@@ -246,6 +246,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4547094361697878917, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
+      propertyPath: flying
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547094361697878917, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1687258581}
@@ -370,9 +374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1228167608}
-  distance: 5
-  height: 1
-  maxVerticalAngle: 5
+  distance: 8
+  height: 3
+  maxVerticalAngle: 10
   maxHorizontalAngle: 10
   tiltSpeed: 10
   useFloorNormal: 1

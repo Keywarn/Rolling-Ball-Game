@@ -49,8 +49,9 @@ public class PlayerMove : MonoBehaviour
             flying = true;
             capsuleAnimator.SetTrigger("Open");
             rigid.useGravity = false;
-            transform.rotation = mainCamera.transform.rotation;
+            transform.rotation = Quaternion.LookRotation(rigid.velocity, Vector3.up);
             flightPath = transform.rotation.eulerAngles;
+            flightPath.x = 0;
             rigid.angularVelocity = Vector3.zero;
 
         }
