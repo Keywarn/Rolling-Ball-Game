@@ -270,8 +270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b842d6e58ebd4258b5a61c0339bfa63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 222177592}
   target: {fileID: 1296001109}
+  mainCamera: {fileID: 1687258585}
   offset: {x: 0, y: -0.263, z: 0}
+  player: {fileID: 1228167608}
 --- !u!1 &248684689
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,19 +596,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -613,7 +616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71392565f5d9e49e484ef160aa26da4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -994,6 +997,10 @@ PrefabInstance:
       propertyPath: ground.m_Bits
       value: 768
       objectReference: {fileID: 0}
+    - target: {fileID: 4547094361697878917, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
+      propertyPath: monkeyAnimator
+      value: 
+      objectReference: {fileID: 222177592}
     - target: {fileID: 4547094361697878917, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
       propertyPath: scoreboard.m_Bits
       value: 512

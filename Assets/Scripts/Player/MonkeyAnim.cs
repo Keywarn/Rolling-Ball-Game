@@ -15,6 +15,11 @@ public class MonkeyAnim : MonoBehaviour
 
     [SerializeField]
     private Vector3 offset;
+
+    [SerializeField]
+    private GameObject player;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +29,14 @@ public class MonkeyAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = target.position + offset;
-        transform.rotation = mainCamera.transform.rotation;
+        if(player.GetComponent<PlayerMove>().Grounded() && !player.GetComponent<PlayerMove>().flying){
+            transform.position = target.position + offset;
+            transform.rotation = mainCamera.transform.rotation;
+        }
+        else if(player.GetComponent<PlayerMove>().flying) {
+            transform.position = target.position + offset;
+            transform.rotation = player.transform.rotation;
+        }
 
     }
 
