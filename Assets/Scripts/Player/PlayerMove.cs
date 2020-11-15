@@ -47,6 +47,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private AudioSource rolling;
 
+    [SerializeField]
+    private GameObject water;
+
     public bool flying;
     public bool canScore = false;
     public bool scored = false;
@@ -156,6 +159,18 @@ public class PlayerMove : MonoBehaviour
         else {
             monkeyAnimator.SetFloat("WalkingMove", 0);
         }
+
+        if (Grounded() && flying){
+            mainCamera.GetComponent<GameManager>().EndGame(false);
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+  {
+        if (col.gameObject == water){
+            Destroy(mainCamera.GetComponent<SmoothFollow>());
+            mainCamera.GetComponent<GameManager>().EndGame(false);
+        }
     }
     
     public void Score() {
@@ -166,7 +181,7 @@ public class PlayerMove : MonoBehaviour
                 {  
                     scored = true;
                     mainCamera.GetComponent<GameManager>().score += hit.transform.gameObject.GetComponent<Score>().score;
-                    mainCamera.GetComponent<GameManager>().EndGame();
+                    mainCamera.GetComponent<GameManager>().EndGame(true);
                 }
             }
     }
