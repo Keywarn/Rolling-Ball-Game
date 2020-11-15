@@ -35,6 +35,8 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     private Animator capsuleAnimator;
+    [SerializeField]
+    private Animator  monkeyAnimator;
 
     [SerializeField]
     private LayerMask scoreboard;
@@ -101,6 +103,7 @@ public class PlayerMove : MonoBehaviour
                 rolling.Play();
                 rollPassed = 0f;
             }
+            monkeyAnimator.SetFloat("WalkingMove", rigid.velocity.magnitude/10f);
              // Slow down when no input recieved
             if (SimpleInput.GetAxis("Vertical") == 0.0f && SimpleInput.GetAxis("Horizontal") == 0.0f && rigid.velocity.magnitude > 0.0f){
                 rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, rollSpeed * 0.1f * Time.deltaTime);
@@ -117,6 +120,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
         else if (flying) {
+            monkeyAnimator.SetFloat("WalkingMove", 0f);
             float roll = -SimpleInput.GetAxis("Horizontal") * maxRoll;
             float tilt = SimpleInput.GetAxis("Vertical") * maxTilt;
             float yaw =  SimpleInput.GetAxis("Horizontal") * maxYaw;
@@ -141,6 +145,9 @@ public class PlayerMove : MonoBehaviour
             //High Side drag, cant glide sideways
             Vector3 sideDrag = rigid.velocity - Vector3.Exclude(transform.right, rigid.velocity);
             rigid.AddForce( -sideDrag * sideDrag.magnitude * Time.deltaTime);
+        }
+        else {
+            monkeyAnimator.SetFloat("WalkingMove", 0);
         }
     }
     
