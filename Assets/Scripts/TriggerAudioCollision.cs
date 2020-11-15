@@ -31,7 +31,6 @@ public class TriggerAudioCollision : MonoBehaviour
     void OnTriggerEnter(Collider col)
   {
         if (col.gameObject == trigger && !done){
-            Debug.Log("Playing Wind");
             audio.Play();
             if(onlyOnce){
                 done = true;

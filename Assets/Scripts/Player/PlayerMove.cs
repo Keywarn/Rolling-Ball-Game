@@ -42,9 +42,15 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private AudioSource opening;
 
+    [SerializeField]
+    private AudioSource rolling;
+
     public bool flying;
     public bool canScore = false;
     public bool scored = false;
+
+    private float rollInterval = 5f;
+    private float rollPassed;
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +95,12 @@ public class PlayerMove : MonoBehaviour
         //Check for ground
         if(Grounded() &! flying) {
             Vector3 floorNormal = GetFloorNormal();
-            
+            //Rolling Noise
+            rollPassed += Time.deltaTime;
+            if(rollPassed >= rollInterval / rigid.velocity.magnitude){
+                rolling.Play();
+                rollPassed = 0f;
+            }
              // Slow down when no input recieved
             if (SimpleInput.GetAxis("Vertical") == 0.0f && SimpleInput.GetAxis("Horizontal") == 0.0f && rigid.velocity.magnitude > 0.0f){
                 rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, rollSpeed * 0.1f * Time.deltaTime);
@@ -101,6 +112,8 @@ public class PlayerMove : MonoBehaviour
                 Vector3 rightApply = SimpleInput.GetAxis("Horizontal") * mainCamera.transform.right;
                 //Zoom
                 rigid.AddForce((forwardApply + rightApply) * rollSpeed);
+
+                
             }
         }
         else if (flying) {
