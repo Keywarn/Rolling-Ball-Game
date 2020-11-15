@@ -33,6 +33,10 @@ public class MonkeyAnim : MonoBehaviour
             transform.position = target.position + offset;
             transform.rotation = mainCamera.transform.rotation;
         }
+        else if(!player.GetComponent<PlayerMove>().Grounded() && !player.GetComponent<PlayerMove>().flying){
+            transform.position = target.position;
+            transform.rotation = player.transform.rotation;
+        }
         else if(player.GetComponent<PlayerMove>().flying) {
             transform.position = target.position + offset;
             transform.rotation = player.transform.rotation;

@@ -67,6 +67,7 @@ public class PlayerMove : MonoBehaviour
         if (SimpleInput.GetButtonUp("Fly") && !Grounded() && !flying && !toggle) {
             flying = true;
             capsuleAnimator.SetTrigger("Open");
+            monkeyAnimator.SetTrigger("Fly");
             rigid.useGravity = false;
             transform.rotation = Quaternion.LookRotation(rigid.velocity, Vector3.up);
             flightPath = transform.rotation.eulerAngles;
@@ -81,6 +82,7 @@ public class PlayerMove : MonoBehaviour
             flying = false;
             canScore = true;
             capsuleAnimator.SetTrigger("Close");
+            monkeyAnimator.SetTrigger("StopFly");
             rigid.useGravity = true;
 
         }
