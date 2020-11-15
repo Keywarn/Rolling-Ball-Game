@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b6fe9ef240e471bb9eb54568b45a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
+  text: {fileID: 1545048673}
   play: {fileID: 2079606675}
   endPos: {x: 0, y: 12.856075, z: -21.14}
 --- !u!82 &2079606674

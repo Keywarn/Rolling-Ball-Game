@@ -20,9 +20,15 @@ public class GameManager : MonoBehaviour
     void FixedUpdate()
     {
         scoreText.text = score.ToString("000");
+        
     }
 
     public void EndGame() {
+        Debug.Log(PlayerPrefs.GetInt("Highscore"));
+        if(score > PlayerPrefs.GetInt("Highscore")){
+            PlayerPrefs.SetInt("Highscore", score);
+            Debug.Log(PlayerPrefs.GetInt("Highscore").ToString("000"));
+        }
         SceneManager.LoadScene("Level");
     }
 }

@@ -158,7 +158,7 @@ public class PlayerMove : MonoBehaviour
     }
     public bool Grounded()
     {
-        return Physics.CheckSphere(transform.position - (Vector3.up * 0.5f), 1, ground);
+        return Physics.CheckSphere(transform.position - (Vector3.up * 0.45f), 1, ground);
     }
 
     public Vector3 GetFloorNormal()
