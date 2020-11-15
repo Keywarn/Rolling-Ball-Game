@@ -962,6 +962,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   play: {fileID: 2079606675}
+  endPos: {x: 0, y: 12.856075, z: -21.14}
+  endRot: {x: 0, y: 0, z: 0}
 --- !u!82 &2079606674
 AudioSource:
   m_ObjectHideFlags: 0
