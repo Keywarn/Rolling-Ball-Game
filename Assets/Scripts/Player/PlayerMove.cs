@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetButtonDown("Fly") && !Grounded() && !flying) {
+        if (SimpleInput.GetButtonDown("Fly") && !Grounded() && !flying) {
             flying = true;
             capsuleAnimator.SetTrigger("Open");
             rigid.useGravity = false;
