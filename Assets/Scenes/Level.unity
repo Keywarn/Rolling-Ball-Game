@@ -341,7 +341,7 @@ GameObject:
   m_TagString: WindTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &380455086
 Transform:
@@ -1036,6 +1036,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cf1fc107d86ab4b688c10b0cf061d23d, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cf1fc107d86ab4b688c10b0cf061d23d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf1fc107d86ab4b688c10b0cf061d23d, type: 3}
@@ -1812,9 +1816,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -5683001615267309505, guid: d3d5293692516470e8218113c9706d5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: -2947006744834390023, guid: d3d5293692516470e8218113c9706d5e, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2947006744834390023, guid: d3d5293692516470e8218113c9706d5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 160172905177067011, guid: d3d5293692516470e8218113c9706d5e, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1828,6 +1840,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d3d5293692516470e8218113c9706d5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 1934900737189653587, guid: d3d5293692516470e8218113c9706d5e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1835,6 +1851,10 @@ PrefabInstance:
     - target: {fileID: 3337295398627588303, guid: d3d5293692516470e8218113c9706d5e, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3337295398627588303, guid: d3d5293692516470e8218113c9706d5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3989597958292197525, guid: d3d5293692516470e8218113c9706d5e, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1848,9 +1868,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 5763919627321036186, guid: d3d5293692516470e8218113c9706d5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7418370608934831234, guid: d3d5293692516470e8218113c9706d5e, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7418370608934831234, guid: d3d5293692516470e8218113c9706d5e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3d5293692516470e8218113c9706d5e, type: 3}
@@ -1871,7 +1899,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1982183765
 MeshCollider:
@@ -2018,7 +2046,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
