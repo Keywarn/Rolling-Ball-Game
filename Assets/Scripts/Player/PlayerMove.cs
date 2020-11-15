@@ -136,6 +136,7 @@ public class PlayerMove : MonoBehaviour
                 {  
                     scored = true;
                     mainCamera.GetComponent<GameManager>().score += hit.transform.gameObject.GetComponent<Score>().score;
+                    mainCamera.GetComponent<GameManager>().EndGame();
                 }
             }
     }

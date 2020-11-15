@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,5 +20,9 @@ public class GameManager : MonoBehaviour
     void FixedUpdate()
     {
         scoreText.text = score.ToString("000");
+    }
+
+    public void EndGame() {
+        SceneManager.LoadScene("Level");
     }
 }
