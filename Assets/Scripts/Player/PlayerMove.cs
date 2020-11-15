@@ -135,7 +135,7 @@ public class PlayerMove : MonoBehaviour
                 if (scoreboard == (scoreboard | (1 << hit.transform.gameObject.layer))) 
                 {  
                     scored = true;
-                    Debug.Log("Scored:" + hit.transform.gameObject.GetComponent<Score>().score);
+                    mainCamera.GetComponent<GameManager>().score += hit.transform.gameObject.GetComponent<Score>().score;
                 }
             }
     }
