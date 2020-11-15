@@ -53,6 +53,8 @@ public class PlayerMove : MonoBehaviour
 
     private float rollInterval = 5f;
     private float rollPassed;
+
+    private bool toggle;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,11 +62,17 @@ public class PlayerMove : MonoBehaviour
         flying = false;
         canScore = false;
         scored = false;
+        toggle = false;
     }
 
-    void Update(){
-        bool toggle = false;
-        if (SimpleInput.GetButtonUp("Fly") && !Grounded() && !flying && !toggle) {
+    void Update(){       
+        if (rigid.velocity.magnitude < 0.1f && Grounded() && canScore && !scored) {
+            Score();
+        }
+    }
+
+    public void Fly() {
+        if (!Grounded() && !flying && !toggle) {
             flying = true;
             capsuleAnimator.SetTrigger("Open");
             monkeyAnimator.SetTrigger("Fly");
@@ -78,17 +86,14 @@ public class PlayerMove : MonoBehaviour
 
         }
 
-        if (SimpleInput.GetButtonUp("Fly") && !Grounded() && flying && !toggle) {
+        if (!Grounded() && flying && !toggle) {
             flying = false;
             canScore = true;
             capsuleAnimator.SetTrigger("Close");
             monkeyAnimator.SetTrigger("StopFly");
             rigid.useGravity = true;
+            toggle = true;
 
-        }
-        
-        if (rigid.velocity.magnitude < 0.1f && Grounded() && canScore && !scored) {
-            Score();
         }
     }
 
