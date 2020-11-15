@@ -45,7 +45,9 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Update(){
-        if (SimpleInput.GetButtonDown("Fly") && !Grounded() && !flying) {
+        bool toggle = false;
+        if (SimpleInput.GetButtonUp("Fly") && !Grounded() && !flying && !toggle) {
+            Debug.Log("Open");
             flying = true;
             capsuleAnimator.SetTrigger("Open");
             rigid.useGravity = false;
@@ -53,6 +55,16 @@ public class PlayerMove : MonoBehaviour
             flightPath = transform.rotation.eulerAngles;
             flightPath.x = 0;
             rigid.angularVelocity = Vector3.zero;
+
+            toggle = true;
+
+        }
+
+        if (SimpleInput.GetButtonUp("Fly") && !Grounded() && flying && !toggle) {
+            Debug.Log("Close");
+            flying = false;
+            capsuleAnimator.SetTrigger("Close");
+            rigid.useGravity = true;
 
         }
     }
