@@ -39,6 +39,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private LayerMask scoreboard;
 
+    [SerializeField]
+    private AudioSource opening;
+
     public bool flying;
     public bool canScore = false;
     public bool scored = false;
@@ -61,7 +64,7 @@ public class PlayerMove : MonoBehaviour
             flightPath = transform.rotation.eulerAngles;
             flightPath.x = 0;
             rigid.angularVelocity = Vector3.zero;
-
+            opening.Play();
             toggle = true;
 
         }
