@@ -2,6 +2,7 @@
 public class SmoothFollow : MonoBehaviour
 {
 
+	//Currently 3 and 1 for distance, 6 and 2 works well for further out
 	// The target we are following
 	[SerializeField]
 	private GameObject player;
@@ -42,7 +43,7 @@ public class SmoothFollow : MonoBehaviour
 	{
 		// Rotate camera container along the x axis when tilting the joystick up or down to give a forward and back tilt effect.
 		// The further up the joystick is the higher the angle for target rotation will be and vice versa.
-		float scaledVerticalTilt = initialXRotation + (SimpleInput.GetAxis("Vertical") * maxVerticalAngle);
+		float scaledVerticalTilt = initialXRotation - (SimpleInput.GetAxis("Vertical") * maxVerticalAngle);
 
 		// Using floor normal adjust the rotation of the camera's x axis at rest.
 		float angleBetweenFloorNormal = useFloorNormal ? Vector3.SignedAngle(Vector3.up, player.GetComponent<PlayerMove>().GetFloorNormal(), transform.right) : 0.0f;
