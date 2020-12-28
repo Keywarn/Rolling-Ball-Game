@@ -1,13 +1,8 @@
-# Game Jam 2020
-
-A game made for the CSS GameJam 2020 at University of Bristol
-Theme: Keep on moving forward
-Inspired by Super Monkey Ball Target
-
-All assets are mine with the exception of:
+# Rolling Game
 
 [SimpleInput by Yasirkula](https://github.com/yasirkula/UnitySimpleInput) - used for the on-screen joysticks in the mobile version.
 
-Music was produced by my housemate, for this project, during the time-period of the gamejam
+## Ideas for scoring/timing
 
-Use of font [Karmatic Arcade](https://www.1001fonts.com/karmatic-arcade-font.html)
+- Survive as long as possible, time going down and pickups refresh the time
+- Just scored based on the number of pickups gathered
