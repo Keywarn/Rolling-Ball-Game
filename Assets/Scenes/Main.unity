@@ -268,8 +268,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathPrefab: {fileID: 3568933522477020040, guid: e2e1131a7742d4bee97e326fec37985e, type: 3}
-  numPaths: 5
   startPos: {x: 0, y: 0, z: -1}
+  numPaths: 5
+  removeDelay: 2
 --- !u!1 &1048591440
 GameObject:
   m_ObjectHideFlags: 0

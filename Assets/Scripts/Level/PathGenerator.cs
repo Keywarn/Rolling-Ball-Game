@@ -6,11 +6,14 @@ public class PathGenerator : MonoBehaviour
 {
     [SerializeField]
     private Transform pathPrefab;
-    [SerializeField]
-    private int numPaths;
 
     [SerializeField]
     private Vector3 startPos;
+
+    [SerializeField]
+    private int numPaths;
+    [SerializeField]
+    private int removeDelay;
 
     private Vector3 nextPos;
     private Queue<Transform> pathQueue;
@@ -22,10 +25,7 @@ public class PathGenerator : MonoBehaviour
         pathQueue = new Queue<Transform>(numPaths);
         nextPos = startPos;
         for (int i = 0; i < numPaths; i++) {
-			Transform path = (Transform)Instantiate(pathPrefab);
-			path.localPosition = nextPos;
-			nextPos = path.Find("End").transform.position;
-            pathQueue.Enqueue(path);
+			CreatePath();
 		}
     }
 
@@ -33,7 +33,18 @@ public class PathGenerator : MonoBehaviour
         if (col.gameObject.tag == "pathEnd"){
             pathsFinished += 1;
             Destroy(col);
-            Debug.Log(pathsFinished);
+            if(pathsFinished == removeDelay){
+                pathsFinished -= 1;
+                Destroy(pathQueue.Dequeue().gameObject);
+                CreatePath();
+            }
         }
+    }
+
+    void CreatePath(){
+        Transform path = (Transform)Instantiate(pathPrefab);
+        path.localPosition = nextPos;
+        nextPos = path.Find("End").transform.position;
+        pathQueue.Enqueue(path);
     }
 }
