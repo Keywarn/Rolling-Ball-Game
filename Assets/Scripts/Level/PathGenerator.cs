@@ -42,8 +42,8 @@ public class PathGenerator : MonoBehaviour
     }
 
     void CreatePath(){
-        Transform path = (Transform)Instantiate(pathPrefab);
-        path.localPosition = nextPos;
+        Transform path = (Transform)Instantiate(pathPrefab, nextPos, Quaternion.identity);
+        //path.localPosition = nextPos;
         nextPos = path.Find("End").transform.position;
         pathQueue.Enqueue(path);
     }
