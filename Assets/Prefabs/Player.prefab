@@ -272,7 +272,6 @@ GameObject:
   - component: {fileID: 1980085780956370621}
   - component: {fileID: 7643354212236885540}
   - component: {fileID: 2739851191226520423}
-  - component: {fileID: 2386940127001668408}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -343,16 +342,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2386940127001668408
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5611249541632178246}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
