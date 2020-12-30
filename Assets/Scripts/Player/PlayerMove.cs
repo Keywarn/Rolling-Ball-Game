@@ -16,8 +16,6 @@ public class PlayerMove : MonoBehaviour
     private LayerMask ground;
 
     [SerializeField]
-    private AudioSource collect;
-    [SerializeField]
     private AudioSource rolling;
 
     private float rollInterval = 5f;
@@ -61,17 +59,6 @@ public class PlayerMove : MonoBehaviour
 
                 
             }
-        }
-    }
-
-    void OnTriggerEnter(Collider col)
-  {
-
-        if (col.gameObject.tag == "pickup"){
-            Destroy(col.gameObject);
-            Vector3 floorNormal = GetFloorNormal();
-            rigid.velocity += 5 * Vector3.Cross(mainCamera.transform.right, floorNormal);
-            collect.Play();
         }
     }
     
