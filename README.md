@@ -1,5 +1,7 @@
 # Rolling Game
 
+Originally designed for a gamejam, has since been worked on to try and make a game which will eventually be released. The final result from the gamejam can be found in releases and on the gamejam branch.
+
 [SimpleInput by Yasirkula](https://github.com/yasirkula/UnitySimpleInput) - used for the on-screen joysticks in the mobile version.
 
 ## Ideas for scoring/timing
