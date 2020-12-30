@@ -8,14 +8,14 @@ public class PathGenerator : MonoBehaviour
     private Transform pathPrefab;
 
     [SerializeField]
-    private Vector3 startPos;
+    private Transform startPos;
 
     [SerializeField]
     private int numPaths;
     [SerializeField]
     private int removeDelay;
 
-    private Vector3 nextPos;
+    private Transform nextPos;
     private Queue<Transform> pathQueue;
     private int pathsFinished = 0;
 
@@ -42,9 +42,9 @@ public class PathGenerator : MonoBehaviour
     }
 
     void CreatePath(){
-        Transform path = (Transform)Instantiate(pathPrefab, nextPos, Quaternion.identity);
+        Transform path = (Transform)Instantiate(pathPrefab, nextPos.position, nextPos.rotation);
         //path.localPosition = nextPos;
-        nextPos = path.Find("End").transform.position;
+        nextPos = path.Find("End").transform;
         pathQueue.Enqueue(path);
     }
 }
