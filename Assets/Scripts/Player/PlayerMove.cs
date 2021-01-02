@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField]
     private float rollSpeed = 50;
+    [SerializeField]
+    private float reduceSpeed = 10;
 
     [SerializeField]
     private GameObject mainCamera;
@@ -47,7 +49,7 @@ public class PlayerMove : MonoBehaviour
             }
              // Slow down when no input recieved
             if (SimpleInput.GetAxis("Vertical") == 0.0f && SimpleInput.GetAxis("Horizontal") == 0.0f && rigid.velocity.magnitude > 0.0f){
-                rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, rollSpeed * 0.1f * Time.deltaTime);
+                rigid.velocity = Vector3.Lerp(rigid.velocity, Vector3.zero, reduceSpeed * 0.1f * Time.deltaTime);
             }
 
             else {
