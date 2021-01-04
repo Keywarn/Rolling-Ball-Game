@@ -19,5 +19,6 @@ Originally designed for a gamejam, has since been worked on to try and make a ga
 | 3     | Half pipe ending in flat |
 |       |                          |
 
+Flat pieces are 3 units wide and half a unity thick.
 If the index is odd, cycle to the next index. Otherwise chance of staying on same index or moving forward one.
 
