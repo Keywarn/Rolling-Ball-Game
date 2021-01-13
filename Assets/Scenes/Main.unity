@@ -200,22 +200,6 @@ PrefabInstance:
       propertyPath: startPos
       value: 
       objectReference: {fileID: 1447517390}
-    - target: {fileID: 760873363, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
-      propertyPath: pathPrefab
-      value: 
-      objectReference: {fileID: 1582108229254045224, guid: 7c35e3acf93b242d68bc072e9d2a83e8, type: 3}
-    - target: {fileID: 760873363, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
-      propertyPath: pathPrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 760873363, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
-      propertyPath: pathPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1582108229254045224, guid: 7c35e3acf93b242d68bc072e9d2a83e8, type: 3}
-    - target: {fileID: 760873363, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
-      propertyPath: pathPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 6053794496823281995, guid: d067a2781d2af4cae85b94ec71b8f06a, type: 3}
     - target: {fileID: 4547094361697878915, guid: 5b2cf19e9eecf49dbbef35820d2d5c52, type: 3}
       propertyPath: m_Name
       value: Player
