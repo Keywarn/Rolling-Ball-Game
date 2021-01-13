@@ -5,7 +5,7 @@ using UnityEngine;
 public class PathGenerator : MonoBehaviour
 {
     [SerializeField]
-    private Transform pathPrefab;
+    private Transform[] pathPrefabs;
 
     [SerializeField]
     private Transform startPos;
@@ -42,7 +42,8 @@ public class PathGenerator : MonoBehaviour
     }
 
     void CreatePath(){
-        Transform path = (Transform)Instantiate(pathPrefab, nextPos.position, nextPos.rotation);
+        Transform selectedPath = pathPrefabs[Random.Range(0, pathPrefabs.Length)];
+        Transform path = (Transform)Instantiate(selectedPath, nextPos.position, nextPos.rotation);
         //path.localPosition = nextPos;
         nextPos = path.Find("End").transform;
         pathQueue.Enqueue(path);
