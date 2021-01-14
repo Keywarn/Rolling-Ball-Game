@@ -452,7 +452,7 @@ MonoBehaviour:
   player: {fileID: 760873362}
   distance: 8
   height: 1
-  maxVerticalAngle: 5
+  maxVerticalAngle: 10
   maxHorizontalAngle: 10
   tiltSpeed: 0
   useFloorNormal: 1

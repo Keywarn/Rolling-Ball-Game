@@ -34,7 +34,7 @@ public class SmoothFollow : MonoBehaviour
 	}
 
 	void Update() {
-		if(player.GetComponent<PlayerMove>().Grounded()){
+		if(player.GetComponent<PlayerMove>().Grounded() && tiltSpeed > 0f){
 			CameraTilt();
 		}
 	}
