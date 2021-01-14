@@ -18,7 +18,6 @@ public class PathGenerator : MonoBehaviour
     private Transform nextPos;
     private Queue<Transform> pathQueue;
     private int paths = 0;
-    private int pathsFinished = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +31,10 @@ public class PathGenerator : MonoBehaviour
 
     void OnTriggerExit(Collider col){
         if (col.gameObject.name == "End"){
-            pathsFinished += 1;
+            int finished = int.Parse(col.gameObject.transform.root.gameObject.name);
             Destroy(col);
-            if(pathsFinished == removeDelay){
-                pathsFinished -= 1;
+
+            while(int.Parse(pathQueue.Peek().gameObject.name) < finished) {
                 Destroy(pathQueue.Dequeue().gameObject);
                 CreatePath();
             }
@@ -48,7 +47,6 @@ public class PathGenerator : MonoBehaviour
         Transform path = (Transform)Instantiate(selectedPath, nextPos.position, Quaternion.Inverse(selectedPath.GetChild(0).Find("Start").rotation) * nextPos.rotation);
         path.gameObject.name = paths.ToString();
         paths ++;
-        print(path.GetChild(0));
         nextPos = path.GetChild(0).Find("End").transform;
         pathQueue.Enqueue(path);
     }
