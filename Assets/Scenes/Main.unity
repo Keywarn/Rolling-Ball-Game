@@ -454,7 +454,7 @@ MonoBehaviour:
   height: 1
   maxVerticalAngle: 5
   maxHorizontalAngle: 10
-  tiltSpeed: 10
+  tiltSpeed: 0
   useFloorNormal: 1
 --- !u!114 &1164228525
 MonoBehaviour:

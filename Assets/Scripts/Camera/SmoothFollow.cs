@@ -84,8 +84,8 @@ public class SmoothFollow : MonoBehaviour
 
 		// Position the camera behind target at a distance of offset
 		transform.position = player.transform.position - (transform.forward * distance);
-		transform.position += Vector3.up * height;
 		//transform.LookAt(new Vector3(player.transform.position.x,transform.position.y,player.transform.position.z));
-		//transform.LookAt(player.transform.position);
+		transform.LookAt(player.transform.position);
+		transform.position += Vector3.up * height;
 	}
 }
