@@ -30,7 +30,7 @@ public class PathGenerator : MonoBehaviour
     }
 
     void OnTriggerExit(Collider col){
-        if (col.gameObject.tag == "pathEnd"){
+        if (col.gameObject.name == "End"){
             pathsFinished += 1;
             Destroy(col);
             if(pathsFinished == removeDelay){
@@ -43,9 +43,11 @@ public class PathGenerator : MonoBehaviour
 
     void CreatePath(){
         Transform selectedPath = pathPrefabs[Random.Range(0, pathPrefabs.Length)];
-        Transform path = (Transform)Instantiate(selectedPath, nextPos.position, nextPos.rotation);
+        
+        Transform path = (Transform)Instantiate(selectedPath, nextPos.position, Quaternion.Inverse(selectedPath.GetChild(0).Find("Start").rotation) * nextPos.rotation);
         //path.localPosition = nextPos;
-        nextPos = path.Find("End").transform;
+        print(path.GetChild(0));
+        nextPos = path.GetChild(0).Find("End").transform;
         pathQueue.Enqueue(path);
     }
 }
