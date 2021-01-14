@@ -17,6 +17,7 @@ public class PathGenerator : MonoBehaviour
 
     private Transform nextPos;
     private Queue<Transform> pathQueue;
+    private int paths = 0;
     private int pathsFinished = 0;
 
     // Start is called before the first frame update
@@ -45,7 +46,8 @@ public class PathGenerator : MonoBehaviour
         Transform selectedPath = pathPrefabs[Random.Range(0, pathPrefabs.Length)];
         
         Transform path = (Transform)Instantiate(selectedPath, nextPos.position, Quaternion.Inverse(selectedPath.GetChild(0).Find("Start").rotation) * nextPos.rotation);
-        //path.localPosition = nextPos;
+        path.gameObject.name = paths.ToString();
+        paths ++;
         print(path.GetChild(0));
         nextPos = path.GetChild(0).Find("End").transform;
         pathQueue.Enqueue(path);
