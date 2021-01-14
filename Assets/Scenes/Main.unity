@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 760873362}
-  distance: 3
+  distance: 8
   height: 1
   maxVerticalAngle: 5
   maxHorizontalAngle: 10
