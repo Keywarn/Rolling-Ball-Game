@@ -27,12 +27,17 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rigid = this.GetComponent<Rigidbody>();
+        GameEventManager.GameStart += GameStart;
+		GameEventManager.GameOver += GameOver;
     }
 
-    void Update(){       
-
+    void GameStart() {
+        rigid.isKinematic = false;
     }
 
+    void GameOver() {
+        rigid.isKinematic = true;
+    }
 
     // Update is called once per frame
     void FixedUpdate()
