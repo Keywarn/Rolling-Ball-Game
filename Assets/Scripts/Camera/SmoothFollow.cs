@@ -24,18 +24,29 @@ public class SmoothFollow : MonoBehaviour
 
 	private float initialXRotation;
 
+	private bool follow;
+
 
 	private Rigidbody rigid;
 
 	// Use this for initialization
 	void Start() { 
+		follow = true;
 		rigid = player.GetComponent<Rigidbody>();
 		initialXRotation = transform.eulerAngles.x;
+
+		GameEventManager.GameOver += GameOver;
+	}
+
+	void GameOver() {
+		follow = false;
 	}
 
 	void Update() {
-		if(player.GetComponent<PlayerMove>().Grounded() && tiltSpeed > 0f){
-			CameraTilt();
+		if(tiltSpeed > 0f && follow){
+			if(player.GetComponent<PlayerMove>().Grounded()){
+				CameraTilt();
+			}
 		}
 	}
 
@@ -64,28 +75,32 @@ public class SmoothFollow : MonoBehaviour
 	// Update is called once per frame
 	void LateUpdate()
 	{
-		// Get forward vector minus the y component
-		Vector3 vectorA = new Vector3(transform.forward.x, 0.0f, transform.forward.z);
+		if(follow){
+			// Get forward vector minus the y component
+			Vector3 vectorA = new Vector3(transform.forward.x, 0.0f, transform.forward.z);
 
-		// Get target's velocity vector minus the y component
-		Vector3 vectorB = new Vector3(rigid.velocity.x, 0.0f, rigid.velocity.z);
+			// Get target's velocity vector minus the y component
+			Vector3 vectorB = new Vector3(rigid.velocity.x, 0.0f, rigid.velocity.z);
 
-		// Find the angle between vectorA and vectorB
-		float rotateAngle = Vector3.SignedAngle(vectorA.normalized, vectorB.normalized, Vector3.up);
+			// Find the angle between vectorA and vectorB
+			float rotateAngle = Vector3.SignedAngle(vectorA.normalized, vectorB.normalized, Vector3.up);
 
-		// Get the target's speed (maginitude) without the y component
-		// Only set speed factor when vector A and B are almost facing the same direction
-		float speedFactor = Vector3.Dot(vectorA, vectorB) > 0.0f ? vectorB.magnitude : 1.0f;
+			// Get the target's speed (maginitude) without the y component
+			// Only set speed factor when vector A and B are almost facing the same direction
+			float speedFactor = Vector3.Dot(vectorA, vectorB) > 0.0f ? vectorB.magnitude : 1.0f;
 
-		// Rotate towards the angle between vectorA and vectorB
-		// Use speedFactor so camera doesn't rotatate at a constant speed
-		// Limit speedFactor to be between 1 and 2
-		transform.Rotate(Vector3.up, rotateAngle * Mathf.Clamp(speedFactor, 1.0f, 2.0f) * Time.deltaTime);
+			// Rotate towards the angle between vectorA and vectorB
+			// Use speedFactor so camera doesn't rotatate at a constant speed
+			// Limit speedFactor to be between 1 and 2
+			transform.Rotate(Vector3.up, rotateAngle * Mathf.Clamp(speedFactor, 1.0f, 2.0f) * Time.deltaTime);
 
-		// Position the camera behind target at a distance of offset
-		transform.position = player.transform.position - (transform.forward * distance);
+			// Position the camera behind target at a distance of offset
+			transform.position = player.transform.position - (transform.forward * distance);
+		}
 		//transform.LookAt(new Vector3(player.transform.position.x,transform.position.y,player.transform.position.z));
 		transform.LookAt(player.transform.position);
-		transform.position += Vector3.up * height;
+		if(follow){
+			transform.position += Vector3.up * height;
+		}
 	}
 }

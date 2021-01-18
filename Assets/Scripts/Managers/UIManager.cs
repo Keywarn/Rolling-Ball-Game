@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     void Start() {
         GameEventManager.GameStart += GameStart;
 		GameEventManager.GameOver += GameOver;
+
+        gameOverText.enabled = false;
     }
 
     public void StartPressed(){

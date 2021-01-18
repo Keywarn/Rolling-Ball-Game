@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     void GameOver() {
-        rigid.isKinematic = true;
+        Destroy(this);
     }
 
     // Update is called once per frame
