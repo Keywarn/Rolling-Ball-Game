@@ -54,4 +54,8 @@ public class PathGenerator : MonoBehaviour
         nextPos = path.GetChild(0).Find("End").transform;
         pathQueue.Enqueue(path);
     }
+
+    void OnDestroy(){
+        GameEventManager.GameStart -= GameStart;
+    }
 }

@@ -84,4 +84,9 @@ public class PlayerMove : MonoBehaviour
         }
         else return(Vector3.zero);
     }
+
+    void OnDestroy(){
+        GameEventManager.GameStart -= GameStart;
+		GameEventManager.GameOver -= GameOver;
+    }
 }

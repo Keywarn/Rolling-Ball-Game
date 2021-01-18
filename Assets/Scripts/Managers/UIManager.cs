@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class UIManager : MonoBehaviour
         GameEventManager.TriggerGameStart();
     }
 
+    public void RestartPressed(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     private void GameStart() {
         startText.enabled = false;
         titleText.enabled = false;
@@ -32,5 +37,10 @@ public class UIManager : MonoBehaviour
 
     private void GameOver() {
         gameOverText.enabled = true;
+    }
+
+    void OnDestroy(){
+        GameEventManager.GameStart -= GameStart;
+		GameEventManager.GameOver -= GameOver;
     }
 }

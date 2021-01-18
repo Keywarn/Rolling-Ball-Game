@@ -103,4 +103,8 @@ public class SmoothFollow : MonoBehaviour
 			transform.position += Vector3.up * height;
 		}
 	}
+
+	void OnDestroy(){
+		GameEventManager.GameOver -= GameOver;
+    }
 }
