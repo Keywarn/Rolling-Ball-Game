@@ -22,6 +22,10 @@ public class PathGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameEventManager.GameStart += GameStart;
+    }
+
+    void GameStart() {
         pathQueue = new Queue<Transform>(numPaths);
         nextPos = startPos;
         for (int i = 0; i < numPaths; i++) {
