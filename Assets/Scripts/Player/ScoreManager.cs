@@ -5,18 +5,33 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
+    private float startTimer;
+
+    public float time;
+
+    private bool playing;
+    [SerializeField]
     private AudioSource collect;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameEventManager.GameStart += GameStart;
+    }
+
+    void GameStart() {
+        time = startTimer;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (time > 0){
+            time -= Time.deltaTime;
+        }
+        else{
+            GameEventManager.TriggerGameOver();
+        }
     }
 
     void OnTriggerEnter(Collider col){
@@ -25,5 +40,9 @@ public class ScoreManager : MonoBehaviour
             Destroy(col.gameObject);
             collect.Play();
         }
+    }
+
+        void OnDestroy(){
+        GameEventManager.GameStart -= GameStart;
     }
 }
