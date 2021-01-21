@@ -12,7 +12,7 @@ public class Killer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameEventManager.GameOver += GameOver;
     }
 
     // Update is called once per frame
@@ -26,7 +26,10 @@ public class Killer : MonoBehaviour
     void OnTriggerExit(Collider col){
         if (col.gameObject.tag == "Player"){
             GameEventManager.TriggerGameOver();
-            Destroy(this);
         }
+    }
+
+    void GameOver() {
+        Destroy(this);
     }
 }

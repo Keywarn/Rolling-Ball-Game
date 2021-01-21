@@ -21,16 +21,19 @@ public class ScoreManager : MonoBehaviour
 
     void GameStart() {
         time = startTimer;
+        playing = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (time > 0){
-            time -= Time.deltaTime;
-        }
-        else{
-            GameEventManager.TriggerGameOver();
+        if(playing){
+            if (time > 0){
+                time -= Time.deltaTime;
+            }
+            else{
+                GameEventManager.TriggerGameOver();
+            }
         }
     }
 
