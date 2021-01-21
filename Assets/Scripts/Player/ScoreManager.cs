@@ -7,6 +7,12 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private float startTimer;
 
+    [SerializeField]
+    private float maxTimer;
+
+    [SerializeField]
+    private float timerGain;
+
     private float liveTime;
     private float time;
 
@@ -44,6 +50,7 @@ public class ScoreManager : MonoBehaviour
         if(col.gameObject.tag == "pickup"){
             Destroy(col.gameObject);
             collect.Play();
+            liveTime = Mathf.Min(liveTime + timerGain, maxTimer);
         }
     }
 
