@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private float timerGain;
 
+    [SerializeField]
+    private Text scoreText;
+
     private float liveTime;
     private float time;
 
@@ -23,6 +27,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreText.enabled = false;
         GameEventManager.GameStart += GameStart;
         GameEventManager.GameOver += GameOver;
     }
@@ -56,7 +61,9 @@ public class ScoreManager : MonoBehaviour
 
     void GameOver() {
         playing = false;
-        print(time);
+        scoreText.text = ((int)(time*100f)).ToString() + " Pts";
+        scoreText.enabled = true;
+
         //Update score
     }
 
