@@ -7,7 +7,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private float startTimer;
 
-    public float time;
+    private float liveTime;
+    private float time;
 
     private bool playing;
     [SerializeField]
@@ -17,10 +18,11 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         GameEventManager.GameStart += GameStart;
+        GameEventManager.GameOver += GameOver;
     }
 
     void GameStart() {
-        time = startTimer;
+        liveTime = startTimer;
         playing = true;
     }
 
@@ -28,8 +30,9 @@ public class ScoreManager : MonoBehaviour
     void FixedUpdate()
     {
         if(playing){
-            if (time > 0){
-                time -= Time.deltaTime;
+            time += Time.deltaTime;
+            if (liveTime > 0){
+                liveTime -= Time.deltaTime;
             }
             else{
                 GameEventManager.TriggerGameOver();
@@ -39,13 +42,19 @@ public class ScoreManager : MonoBehaviour
 
     void OnTriggerEnter(Collider col){
         if(col.gameObject.tag == "pickup"){
-            Debug.Log("PICKUP");
             Destroy(col.gameObject);
             collect.Play();
         }
     }
 
-        void OnDestroy(){
+    void GameOver() {
+        playing = false;
+        print(time);
+        //Update score
+    }
+
+    void OnDestroy(){
         GameEventManager.GameStart -= GameStart;
+        GameEventManager.GameOver -= GameOver;
     }
 }

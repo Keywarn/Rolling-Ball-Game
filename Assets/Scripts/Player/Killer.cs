@@ -32,4 +32,8 @@ public class Killer : MonoBehaviour
     void GameOver() {
         Destroy(this);
     }
+
+    void OnDestroy(){
+        GameEventManager.GameOver -= GameOver;
+    }
 }
