@@ -121,6 +121,8 @@ MonoBehaviour:
   startTimer: 5
   maxTimer: 10
   timerGain: 1
+  timeMultiplier: 10
+  scoreText: {fileID: 0}
   collect: {fileID: 7445819163459808883}
 --- !u!82 &760873367
 AudioSource:

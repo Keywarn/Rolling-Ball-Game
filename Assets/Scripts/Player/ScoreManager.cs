@@ -15,6 +15,9 @@ public class ScoreManager : MonoBehaviour
     private float timerGain;
 
     [SerializeField]
+    private float timeMultiplier;
+
+    [SerializeField]
     private Text scoreText;
 
     private float liveTime;
@@ -61,7 +64,7 @@ public class ScoreManager : MonoBehaviour
 
     void GameOver() {
         playing = false;
-        scoreText.text = ((int)(time*100f)).ToString() + " Pts";
+        scoreText.text = ((int)(time*timeMultiplier)).ToString() + " Pts";
         scoreText.enabled = true;
 
         //Update score
